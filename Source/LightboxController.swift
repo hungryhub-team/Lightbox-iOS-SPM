@@ -126,6 +126,8 @@ open class LightboxController: UIViewController {
     }
   }
 
+  open var isOverCloseButton = false
+
   open var images: [LightboxImage] {
     get {
       return pageViews.map { $0.image }
@@ -151,7 +153,8 @@ open class LightboxController: UIViewController {
 
   // MARK: - Initializers
 
-  public init(images: [LightboxImage] = [], startIndex index: Int = 0) {
+  public init(images: [LightboxImage] = [], startIndex index: Int = 0, isOverCloseButton: Bool = false) {
+    self.isOverCloseButton = isOverCloseButton
     self.initialImages = images
     self.initialPage = index
     super.init(nibName: nil, bundle: nil)
@@ -192,7 +195,12 @@ open class LightboxController: UIViewController {
   open override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
 
-    scrollView.frame = view.bounds
+    if isOverCloseButton {
+        scrollView.frame = CGRect(x: 25, y:  120, width: UIScreen.main.bounds.width - 50, height:  UIScreen.main.bounds.height - 200)
+    } else {
+        scrollView.frame = view.bounds
+    }
+      
     footerView.frame.size = CGSize(
       width: view.bounds.width,
       height: 100
@@ -206,7 +214,7 @@ open class LightboxController: UIViewController {
     headerView.frame = CGRect(
       x: 0,
       y: 16,
-      width: view.bounds.width,
+      width: Int(view.bounds.width),
       height: 100
     )
   }
@@ -295,7 +303,11 @@ open class LightboxController: UIViewController {
   // MARK: - Layout
 
   open func configureLayout(_ size: CGSize) {
-    scrollView.frame.size = size
+    if isOverCloseButton {
+        scrollView.frame.size = CGSize(width: UIScreen.main.bounds.width - 50, height: UIScreen.main.bounds.height - 200)
+    } else {
+        scrollView.frame.size = size
+    }
     scrollView.contentSize = CGSize(
       width: size.width * CGFloat(numberOfPages) + spacing * CGFloat(numberOfPages - 1),
       height: size.height)
