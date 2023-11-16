@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "cache",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hyperoslo/Cache",
+      "state" : {
+        "revision" : "c7f4d633049c3bd649a353bad36f6c17e9df085f",
+        "version" : "6.0.0"
+      }
+    },
+    {
+      "identity" : "imaginary",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hyperoslo/Imaginary",
+      "state" : {
+        "branch" : "master",
+        "revision" : "2f30de8b84d9f85d3c66386e2461df6db70c645b"
+      }
+    }
+  ],
+  "version" : 2
+}
